@@ -9,6 +9,7 @@ function App() {
   return (
     <>
       <h2 className="mainHeading">Expense Tracker</h2>
+
       <div className="App">
         <ExpenseForm />
         <div className="expenseContainer">

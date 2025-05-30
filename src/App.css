@@ -23,6 +23,7 @@ h4 {
 .App {
   font-family: "Lato", sans-serif;
   min-height: 100vh;
+  
   --input-width: 95%;
   --input-height: 2rem;
 }
