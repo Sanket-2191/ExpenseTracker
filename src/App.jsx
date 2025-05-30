@@ -1,24 +1,25 @@
 
 
+import { Outlet } from "react-router-dom";
 import "./App.css";
-import ExpenseForm from "./components/ExpenseForm/ExpenseForm.jsx";
-import ExpenseInfo from "./components/ExpenseInfo/ExpenseInfo.jsx";
-import ExpenseList from "./components/ExpenseList/ExpenseList.jsx";
+import Header from "./components/Header/Header.jsx";
+import Footer from "./components/Footer/Footer.jsx";
+import Container from "./components/container/Container.jsx";
 
 function App() {
   return (
-    <>
-      <h2 className="mainHeading">Expense Tracker</h2>
+    <div className='min-h-screen flex flex-col'>
+      <Header />
+      <main className='flex-1 bg-background'>
+        <Container>
+          <Outlet />
 
-      <div className="App">
-        <ExpenseForm />
-        <div className="expenseContainer">
-          <ExpenseInfo />
-          <ExpenseList />
-        </div>
-      </div>
-    </>
+        </Container>
+      </main>
+      <Footer />
+    </div>
   );
+
 }
 
 export default App;

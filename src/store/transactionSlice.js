@@ -1,14 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-import { useSelector } from "react-redux";
 
 
 const domain = import.meta.env.VITE_API_URL;
 const API_URL = `${domain}/transactions`
 
-// Helper to get token from localStorage
-const getToken = () => localStorage.getItem("token");
 
 // Fetch all transactions
 export const fetchTransactions = createAsyncThunk(

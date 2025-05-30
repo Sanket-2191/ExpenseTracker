@@ -1,6 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -17,7 +16,24 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+#root{
+  background-color: #030712;
+  padding:2px 5px ;
+}
 .App {
   font-family: sans-serif;
   text-align: center;
+}
+
+button{
+  border: #0099ff dashed 1px;
+  background-color: transparent;
+  color: #baabf2;
+  min-width: 90px;
+  padding:  0 2px;
+  margin-left: 5px;
+}
+
+button:hover{
+  background-color: #081432;
 }
