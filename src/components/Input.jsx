@@ -23,7 +23,8 @@ const Input = forwardRef(
                 <input
                     type={type}
                     placeholder={placeholder}
-                    className={`px-3 py-2 rounded-lg bg-white text-black outline-none focus:bg-gray-50 duration-200 border border-gray-200 w-full ${className}`}
+                    className={`mx-3 max-w-[60%] px-3 py-2 rounded-lg bg-transparent text-[#baabf2] outline-none focus:bg-[#010102]
+                        duration-200 border border-[#0099ff] w-full ${className}`}
                     {...props}
                     ref={ref}
                     id={id}

@@ -9,7 +9,7 @@ const Confirm = ({ handleCloseModal, confirmHandler, textContent, btnText }) => 
     return (
         <div className="fixed w-[100vw] h-[100vh] flex justify-center items-center m-0
          bg-transparent bg-opacity-10 backdrop-blur-lg z-50 top-0 left-0">
-            <div className="bg-gray-400 p-6 rounded-lg shadow-lg text-center w-[500px]">
+            <div className="bg-[#030712] border border-dashed border-[#0099ff]  p-6 rounded-lg shadow-lg text-center w-[500px]">
                 <h2 className="text-xl font-semibold mb-4 text-white">{textContent} </h2>
                 <div className="flex justify-around mt-6">
                     <Button
