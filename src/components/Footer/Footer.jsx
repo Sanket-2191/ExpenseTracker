@@ -4,8 +4,8 @@ import Logo from '../Logo';
 
 const Footer = () => {
     return (
-        <footer className="w-full  h-max-[35vh] bottom-0 overflow-y-auto py-10 border-t-2 border-t-black z-0">
-            <div className="relative z-10 mx-auto max-w-7xl px-4">
+        <footer className="w-full  h-max-[35vh] bottom-0 overflow-y-auto py-10 border-t-5 border-dashed border-t-[#0099ff] z-0">
+            <div className=" z-10 mx-auto max-w-7xl px-4">
                 <div className="-m-6 flex flex-wrap">
                     <div className="w-full p-6 md:w-1/2 lg:w-5/12">
                         <div className="flex h-full flex-col justify-between">

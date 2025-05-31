@@ -16,10 +16,6 @@ const Header = () => {
 
     const navItems = [
         {
-            name: "Home",
-            route: '/',
-            active: true
-        }, {
             name: "Login",
             route: "/login",
             active: !loggedIn,
@@ -51,46 +47,47 @@ const Header = () => {
     ]
     return (
         <>
-            <header className="flex justify-center sm:py-1 py-2 shadow-lg bg-background backdrop-blur-2xl sticky top-0 z-10">
-                <Container>
-                    <nav className="flex flex-col justify-center items-center md:flex-row md:justify-between ">
-                        <div className=" mx-5 w-14">
-                            <Link>
-                                <Logo width="100px" />
-                            </Link>
-                        </div>
-                        <div
-                            className=" flex items-center justify-between
+            <header className="w-[100vw] h-[12vh] mb-1 border border-dashed border-[#0099ff] flex justify-center items-center
+             py-2 px-5 shadow-lg bg-background backdrop-blur-2xl sticky top-0 z-10">
+
+                <nav className="w-[100%] flex flex-col justify-center items-center md:flex-row md:justify-between ">
+                    <div className=" mx-5 w-[15*">
+                        <Link>
+                            <Logo width="100px" />
+                        </Link>
+                    </div>
+                    <div
+                        className=" flex items-center justify-between
                           overflow-auto">
-                            <ul className="flex sm:space-x-7 space-x-3 md:mr-2">
-                                {navItems.map((item) =>
-                                    item.active ? (
-                                        <li key={item.name}>
-                                            <NavLink
-                                                to={item.route}
-                                                className={({ isActive }) => ""}
-                                            >
-                                                {({ isActive }) => (
-                                                    <Button
-                                                        className={` hover:bg-gray-600 text-nowrap
+                        <ul className="flex sm:space-x-7 space-x-3 md:mr-2">
+                            {navItems.map((item) =>
+                                item.active ? (
+                                    <li key={item.name}>
+                                        <NavLink
+                                            to={item.route}
+                                            className={({ isActive }) => ""}
+                                        >
+                                            {({ isActive }) => (
+                                                <Button
+                                                    className={` hover:bg-gray-600 text-nowrap
                                                           ${isActive ? "" : "bg-gray-500 text-amber-950"}`}
-                                                    >
-                                                        {item.name}
-                                                    </Button>
-                                                )}
-                                            </NavLink>
-                                        </li>
-                                    ) : null
-                                )}
-                                {loggedIn && (
-                                    <li className="list-none rounded-full text-text md:hover:bg-accent hover:text-background " key="logoutBtn">
-                                        <LogoutBtn />
+                                                >
+                                                    {item.name}
+                                                </Button>
+                                            )}
+                                        </NavLink>
                                     </li>
-                                )}
-                            </ul>
-                        </div>
-                    </nav>
-                </Container>
+                                ) : null
+                            )}
+                            {loggedIn && (
+                                <li className="list-none rounded-full text-text md:hover:bg-accent hover:text-background " key="logoutBtn">
+                                    <LogoutBtn />
+                                </li>
+                            )}
+                        </ul>
+                    </div>
+                </nav>
+
             </header >
 
 

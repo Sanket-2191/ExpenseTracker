@@ -23,42 +23,42 @@ export const fetchTransactions = createAsyncThunk(
     }
 );
 
-// Create a new transaction
+// create transaction 
 export const createTransaction = createAsyncThunk(
     "transactions/create",
-    async ({ text, amount }, thunkAPI) => {
+    async ({ amount, type, category, date, description }, thunkAPI) => {
         try {
             const token = getToken();
             const res = await axios.post(
                 API_URL,
-                { text, amount },
+                { amount, type, category, date, description },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
-            return res.data.data; // return the created transaction
+            return res.data.data;
         } catch (error) {
             return thunkAPI.rejectWithValue(error.response?.data?.message || error.message);
         }
     }
 );
+
 
 // Update a transaction by id
 export const updateTransaction = createAsyncThunk(
     "transactions/update",
-    async ({ id, text, amount }, thunkAPI) => {
+    async ({ id, amount, type, category, date, description }, thunkAPI) => {
         try {
             const token = getToken();
             const res = await axios.patch(
                 `${API_URL}/${id}`,
-                { text, amount },
+                { amount, type, category, date, description },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
-            return res.data.data; // return updated transaction
+            return res.data.data;
         } catch (error) {
             return thunkAPI.rejectWithValue(error.response?.data?.message || error.message);
         }
     }
 );
-
 // Delete a transaction by id
 export const deleteTransaction = createAsyncThunk(
     "transactions/delete",

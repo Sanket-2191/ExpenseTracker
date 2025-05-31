@@ -31,8 +31,8 @@ const Login = () => {
     }
 
     return (
-        <div className='flex items-center justify-center w-full'>
-            <div className={`mx-auto w-full max-w-lg bg-transparent rounded-xl p-10 border border-dashed border-[#00bcff]`}>
+        <div className='flex items-center justify-center w-full border border-dashed border-[#00bcff]'>
+            <div className={`mx-auto w-full max-w-lg bg-transparent rounded-xl p-10 `}>
                 <div className='mb-2 flex justify-center'>
                     <span className='inline-block w-full max-w-[100px]'>
                         <Logo width='100%' />

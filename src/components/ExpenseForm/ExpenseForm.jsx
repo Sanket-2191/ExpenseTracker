@@ -1,80 +1,137 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 import {
   createTransaction,
   updateTransaction,
-  resetEditing
+  resetEditing,
 } from "../../store/transactionSlice.js";
 
 import styles from "./ExpenseForm.module.css";
+import Button from "../Button.jsx";
+import Select from "../Select.jsx";
+import Input from "../Input.jsx";
 
 const ExpenseForm = () => {
   const dispatch = useDispatch();
   const { editing, toUpdate } = useSelector((state) => state.transactions);
 
-  const expenseTextInput = useRef();
-  const expenseAmountInput = useRef();
+  const descriptionInput = useRef();
+  const amountInput = useRef();
+
+  const [type, setType] = useState("expense");
+  const [category, setCategory] = useState("food");
+  const [date, setDate] = useState(() => new Date().toISOString().split("T")[0]);
+
+  const expenseCategories = ["food", "travel", "shopping", "bills", "other"];
+  const incomeCategories = ["salary", "freelance", "gift", "other"];
+  const categoryOptions = type === "income" ? incomeCategories : expenseCategories;
 
   useEffect(() => {
     if (toUpdate) {
-      expenseTextInput.current.value = toUpdate.text;
-      expenseAmountInput.current.value = toUpdate.amount;
+      descriptionInput.current.value = toUpdate.description || "";
+      amountInput.current.value = toUpdate.amount;
+      setType(toUpdate.type);
+      setCategory(toUpdate.category);
+      setDate(toUpdate.date?.split("T")[0] || new Date().toISOString().split("T")[0]);
     } else {
-      expenseTextInput.current.value = "";
-      expenseAmountInput.current.value = "";
+      clearInputs();
     }
   }, [toUpdate]);
 
-  const clearInput = () => {
-    expenseTextInput.current.value = "";
-    expenseAmountInput.current.value = "";
+  const clearInputs = () => {
+    descriptionInput.current.value = "";
+    amountInput.current.value = "";
+    setType("expense");
+    setCategory("food");
+    setDate(new Date().toISOString().split("T")[0]);
   };
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    const text = expenseTextInput.current.value.trim();
-    const amount = parseFloat(expenseAmountInput.current.value);
+    const description = descriptionInput.current.value.trim();
+    const amount = parseFloat(amountInput.current.value);
 
-    if (!text || isNaN(amount) || amount === 0) return;
+    if (!description || isNaN(amount) || amount === 0) return;
+
+    const payload = {
+      description,
+      amount,
+      category,
+      type,
+      date,
+    };
 
     if (!editing.status) {
-      dispatch(createTransaction({ text, amount }));
+      dispatch(createTransaction(payload))
+        .unwrap()
+        .then(() => toast.success("Transaction added! ✅"))
+        .catch((err) => toast.error(err || "Failed to add transaction ❌"));
     } else {
-      dispatch(updateTransaction({ id: toUpdate.id, text, amount }));
+      dispatch(updateTransaction({ id: toUpdate._id, ...payload }))
+        .unwrap()
+        .then(() => toast.success("Transaction updated! ✏️"))
+        .catch((err) => toast.error(err || "Update failed ❌"));
+
       dispatch(resetEditing());
     }
 
-    clearInput();
+    clearInputs();
   };
 
   return (
-    <form className={styles.form} onSubmit={onSubmitHandler}>
+    <form
+      className={`${styles.form} border border-dashed border-[#00bcff]`}
+      onSubmit={onSubmitHandler}
+    >
       <h3>{editing.status ? "Edit Transaction" : "Add New Transaction"}</h3>
-      <label htmlFor="expenseText">Text</label>
-      <input
-        id="expenseText"
+
+      <Input
+        label="Description"
+        placeholder="Enter description..."
+        ref={descriptionInput}
         className={styles.input}
-        type="text"
-        placeholder="Enter text..."
-        ref={expenseTextInput}
         required
       />
-      <div>
-        <label htmlFor="expenseAmount">Amount</label>
-        <div>(negative - expense, positive - income)</div>
-      </div>
-      <input
-        className={styles.input}
-        id="expenseAmount"
+
+      <Input
+        label="Amount"
         type="number"
         placeholder="Enter amount..."
-        ref={expenseAmountInput}
+        ref={amountInput}
+        className={styles.input}
         required
       />
-      <button className={styles.submitBtn}>
-        {editing.status ? "Edit Transaction" : "Add Transaction"}
-      </button>
+
+      <Select
+        label="Type"
+        options={["expense", "income"]}
+        value={type}
+        onChange={(e) => setType(e.target.value)}
+        className={styles.input}
+      />
+
+      <Select
+        label="Category"
+        options={categoryOptions}
+        value={category}
+        onChange={(e) => setCategory(e.target.value)}
+        className={styles.input}
+      />
+
+      <Input
+        label="Date"
+        type="date"
+        value={date}
+        onChange={(e) => setDate(e.target.value)}
+        className={styles.input}
+        required
+      />
+
+      <Button className={styles.submitBtn} type="submit">
+        {editing.status ? "Update" : "Add"}
+      </Button>
     </form>
   );
 };

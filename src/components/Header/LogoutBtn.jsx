@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 
 
 import Button from '../Button.jsx';
-import Confirm from '../../Pages/Confirm.jsx';
+import Confirm from '../../pages/Confirm.jsx';
 import { logout } from '../../store/authSlice.js';
 
 const LogoutBtn = () => {

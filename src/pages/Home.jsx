@@ -13,40 +13,36 @@ const Home = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        if (loggedIn) {
+            navigate("/add-transaction")
+        }
     }, [])
 
-    if (!loggedIn) {
-        return (
-            <div className='w-full py-8 mt-4 text-center'>
-                <Container>
-                    <div className='min-h-[50vh] flex flex-wrap'>
-                        <div className='p-2 w-full'>
-                            <h1 className='text-2xl font-bold mb-4 font-mono'>
-                                SignUp / Login to continue
-                            </h1>
-                            <div className='flex flex-col gap-6'>
-                                <Link to='/signup'>
-                                    <Button bgColor='bg-black'>
-                                        Signup
-                                    </Button>
-                                </Link>
-                                <Link to='/login'>
-                                    <Button bgColor='bg-black'>
-                                        Login
-                                    </Button>
-                                </Link>
-                            </div>
+    return (
+        <div className='w-full py-8 mt-4 text-center'>
+            <Container>
+                <div className='min-h-[50vh] flex flex-wrap'>
+                    <div className='p-2 w-full'>
+                        <h1 className='text-2xl font-bold mb-4 font-mono'>
+                            SignUp / Login to continue
+                        </h1>
+                        <div className='flex flex-col gap-6'>
+                            <Link to='/signup'>
+                                <Button bgColor='bg-black'>
+                                    Signup
+                                </Button>
+                            </Link>
+                            <Link to='/login'>
+                                <Button bgColor='bg-black'>
+                                    Login
+                                </Button>
+                            </Link>
                         </div>
                     </div>
-                </Container>
-            </div>
-        )
-    }
-
-
-    return (
-        navigate("/add-transaction")
-    )
+                </div>
+            </Container>
+        </div>
+    );
 }
 
 export default Home
