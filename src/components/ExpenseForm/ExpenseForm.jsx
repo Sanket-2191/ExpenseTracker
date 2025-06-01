@@ -39,7 +39,7 @@ const ExpenseForm = () => {
 
   useEffect(() => {
     if (toUpdate) {
-      descriptionInput.current.value = toUpdate.description || "";
+      descriptionInput.current.value = toUpdate.note || "";
       amountInput.current.value = toUpdate.amount;
       setType(toUpdate.type);
       setCategory(toUpdate.category);
@@ -65,12 +65,15 @@ const ExpenseForm = () => {
     if (!description || isNaN(amount) || amount === 0) return;
 
     const payload = {
-      description,
+      note: description,
       amount,
       category,
       type,
       date,
     };
+
+    console.log("Submitting payload:", payload);
+
 
     if (!editing.status) {
       dispatch(createTransaction(payload))
@@ -91,7 +94,7 @@ const ExpenseForm = () => {
 
   return (
     <form
-      className={`${styles.form} border border-dashed border-[#00bcff]`}
+      className={`${styles.form} md:w-[50%] lg:w-[45%] border border-dashed border-[#00bcff]`}
       onSubmit={onSubmitHandler}
     >
       <h3>{editing.status ? "Edit Transaction" : "Add New Transaction"}</h3>

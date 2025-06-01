@@ -14,7 +14,7 @@ const AuthLayout = ({ children }) => {
 
     useEffect(() => {
         if (!loggedIn) {
-            navigate('/login');
+            navigate('/');
         }
 
         setLoader(false);

@@ -19,12 +19,14 @@ const Home = () => {
     }, [])
 
     return (
-        <div className='w-full py-8 mt-4 text-center'>
+        <div className='max-w-full py-8 mt-4 text-center'>
             <Container>
                 <div className='min-h-[50vh] flex flex-wrap'>
                     <div className='p-2 w-full'>
-                        <h1 className='text-2xl font-bold mb-4 font-mono'>
-                            SignUp / Login to continue
+                        <h1 className='text-2xl font-bold mb-4 font-mono text-wrap'>
+                            SignUp / Login to  experience the best way to manage your expenses and analyze your spending habits.
+                            Our platform offers a user-friendly interface, powerful analytics, and seamless integration with your financial accounts.
+                            Take control of your finances today and start your journey towards financial freedom!
                         </h1>
                         <div className='flex flex-col gap-6'>
                             <Link to='/signup'>

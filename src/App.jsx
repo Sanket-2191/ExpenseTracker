@@ -10,9 +10,10 @@ import Container from "./components/container/Container.jsx";
 function App() {
   return (
     <>
-      <div className='min-h-screen flex flex-col'>
+      <div className='w-full min-h-screen flex flex-col'>
         <Header />
-        <main className='flex justify-center items-center bg-background min-h-[45vh] top-[13vh] pt-9'>
+        <main className='w-full flex justify-center items-center bg-background min-h-[45vh] top-[13vh] pt-9'>
+
 
           <Outlet />
 

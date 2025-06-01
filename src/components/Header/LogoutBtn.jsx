@@ -6,14 +6,14 @@ import { useDispatch } from 'react-redux'
 
 import Button from '../Button.jsx';
 import Confirm from '../../pages/Confirm.jsx';
-import { logout } from '../../store/authSlice.js';
+import { logoutUser } from '../../store/authSlice.js';
 
 const LogoutBtn = () => {
     const dispatch = useDispatch();
 
 
     const logoutHandler = async () => {
-        await dispatch(logout());
+        await dispatch(logoutUser());
     }
 
     const [confirmationModal, setConfirmationModal] = useState(false);

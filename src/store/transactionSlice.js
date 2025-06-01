@@ -12,9 +12,8 @@ export const fetchTransactions = createAsyncThunk(
     "transactions/fetchAll",
     async (_, thunkAPI) => {
         try {
-            const token = getToken();
             const res = await axios.get(API_URL, {
-                headers: { Authorization: `Bearer ${token}` },
+                withCredentials: true,
             });
             return res.data.data; // return array of transactions
         } catch (error) {
@@ -26,16 +25,18 @@ export const fetchTransactions = createAsyncThunk(
 // create transaction 
 export const createTransaction = createAsyncThunk(
     "transactions/create",
-    async ({ amount, type, category, date, description }, thunkAPI) => {
+    async ({ amount, type, category, date, note }, thunkAPI) => {
         try {
-            const token = getToken();
             const res = await axios.post(
                 API_URL,
-                { amount, type, category, date, description },
-                { headers: { Authorization: `Bearer ${token}` } }
+                { amount, type, category, date, note }, // match server expectation
+                {
+                    withCredentials: true,
+                }
             );
             return res.data.data;
         } catch (error) {
+            console.log("error while creating transaction: ", error);
             return thunkAPI.rejectWithValue(error.response?.data?.message || error.message);
         }
     }
@@ -47,11 +48,12 @@ export const updateTransaction = createAsyncThunk(
     "transactions/update",
     async ({ id, amount, type, category, date, description }, thunkAPI) => {
         try {
-            const token = getToken();
             const res = await axios.patch(
                 `${API_URL}/${id}`,
                 { amount, type, category, date, description },
-                { headers: { Authorization: `Bearer ${token}` } }
+                {
+                    withCredentials: true,
+                }
             );
             return res.data.data;
         } catch (error) {
@@ -66,7 +68,7 @@ export const deleteTransaction = createAsyncThunk(
         try {
             const token = getToken();
             await axios.delete(`${API_URL}/${id}`, {
-                headers: { Authorization: `Bearer ${token}` },
+                withCredentials: true,
             });
             return id; // return deleted id for reducer to remove
         } catch (error) {

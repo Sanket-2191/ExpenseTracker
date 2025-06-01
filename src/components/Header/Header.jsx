@@ -28,17 +28,18 @@ const Header = () => {
         {
             name: "New",
             route: "/add-transaction",
-            active: true,
+            active: loggedIn,
         },
         {
             name: "History",
             route: "/transaction-history",
             active: loggedIn,
-        }, {
-            name: "Budget",
-            route: "/create-budget",
-            active: loggedIn,
         },
+        // {
+        //     name: "Budget",
+        //     route: "/create-budget",
+        //     active: loggedIn,
+        // },
         {
             name: "Analytics",
             route: "/analytics",
@@ -47,7 +48,7 @@ const Header = () => {
     ]
     return (
         <>
-            <header className="w-[100vw] h-[12vh] mb-1 border border-dashed border-[#0099ff] flex justify-center items-center
+            <header className="max-w-[100%] h-[12vh] mb-1 border border-dashed border-[#0099ff] flex justify-center items-center
              py-2 px-5 shadow-lg bg-background backdrop-blur-2xl sticky top-0 z-10">
 
                 <nav className="w-[100%] flex flex-col justify-center items-center md:flex-row md:justify-between ">

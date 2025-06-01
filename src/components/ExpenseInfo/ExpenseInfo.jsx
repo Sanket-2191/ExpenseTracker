@@ -27,13 +27,13 @@ const ExpenseInfo = () => {
         <div>
           <h4>Income</h4>
           <p id="money-plus" className={`${styles.money} ${styles.plus}`}>
-            +${profit}
+            +inr{profit}
           </p>
         </div>
         <div>
           <h4>Expense</h4>
           <p id="money-minus" className={`${styles.money} ${styles.minus}`}>
-            -${Math.abs(loss)}
+            -inr{Math.abs(loss)}
           </p>
         </div>
       </div>

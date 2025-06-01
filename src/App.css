@@ -13,6 +13,7 @@
 
 .App {
   font-family: "Lato", sans-serif;
+  width: 100vw;
   
 }
 
@@ -22,5 +23,5 @@
   align-items: center;
   justify-content: center;
   margin: 3rem auto;
-  width: 350px;
+  width: 100%;
 }

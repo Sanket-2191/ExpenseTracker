@@ -1,6 +1,6 @@
 .form {
   position: relative;
-  width: 45%;
+  width: 80%;
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -10,6 +10,8 @@
   margin-bottom: 10px;
   border-radius: 12px;
 }
+
+
 
 .form label {
   font-weight: bold;
@@ -23,19 +25,3 @@
   padding-left: 0.5rem;
 }
 
-/* .submitBtn {
-  background-color: #9c88ff;
-  width: var(--input-width);
-  height: var(--input-height);
-  color: white;
-  border: none;
-  font-size: 1.025rem;
-  transition: all 0.2s ease-in-out;
-}
-
-.submitBtn:hover {
-  cursor: pointer;
-  background-color: white;
-  color: #9c88ff;
-  border: 1px solid #9c88ff;
-} */

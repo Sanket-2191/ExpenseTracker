@@ -1,4 +1,4 @@
-import { meta } from "@eslint/js";
+import { toast } from "react-toastify";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -12,38 +12,40 @@ export const registerUser = createAsyncThunk(
     async (formData, { rejectWithValue }) => {
         try {
             const res = await axios.post(
-                `${API_URL}/register`, // Adjust if your route differs
+                `${API_URL}/signup`,
                 formData,
                 {
                     headers: {
                         "Content-Type": "multipart/form-data",
                     },
-                    withCredentials: true, // important for cookie-based tokens
+                    withCredentials: true,
                 }
             );
+            toast.success("Registration successful!");
             return res.data;
         } catch (error) {
-            return rejectWithValue(
-                error.response?.data?.message || "Registration failed"
-            );
+            const message = error.response?.data?.message || "Registration failed";
+            toast.error("Registration failed");
+            return rejectWithValue(message);
         }
     }
 );
+
 
 export const loginUser = createAsyncThunk(
     "auth/loginUser",
     async (credentials, { rejectWithValue }) => {
         try {
-            const res = await axios.post(
-                `${API_URL}/login`, // Adjust if needed
-                credentials,
-                { withCredentials: true }
-            );
+            const res = await axios.post(`${API_URL}/login`, credentials, {
+                withCredentials: true,
+            });
+            toast.success("Login successful!");
             return res.data;
         } catch (error) {
-            return rejectWithValue(
-                error.response?.data?.message || "Login failed"
-            );
+            const message = error.response?.data?.message || "Login failed";
+
+            toast.error("Login failed");
+            return rejectWithValue(message);
         }
     }
 );
@@ -53,23 +55,29 @@ export const logoutUser = createAsyncThunk(
     "auth/logoutUser",
     async (_, { rejectWithValue }) => {
         try {
-            const res = await axios.post(
+            console.log("trying to logout.");
+
+            const res = await axios.get(
                 `${API_URL}/logout`,
-                {},
-                { withCredentials: true }
+                {
+                    withCredentials: true
+                }
             );
+            toast.success("Logout successful!");
+            persistor.purge();
             return res.data;
         } catch (error) {
-            return rejectWithValue(
-                error.response?.data?.message || "Logout failed"
-            );
+            const message = error.response?.data?.message || "Logout failed";
+            console.log("logout error: ", message);
+            toast.error("Logout failed");
+            return rejectWithValue(message);
         }
     }
 );
 
 
 
-const INITIAL_STATE = { loggedIn: true, user: null, loading: false, error: null };
+const INITIAL_STATE = { loggedIn: false, user: null, loading: false, error: null };
 
 const authSlice = createSlice({
     name: "auth",
@@ -113,6 +121,11 @@ const authSlice = createSlice({
             .addCase(logoutUser.fulfilled, (state) => {
                 state.loggedIn = false;
                 state.user = null;
+                state.loading = false;
+            })
+            .addCase(logoutUser.rejected, (state) => {
+                state.loggedIn = true;
+                state.user = state.user;
                 state.loading = false;
             });
     }
