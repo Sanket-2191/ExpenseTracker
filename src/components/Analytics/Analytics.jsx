@@ -14,7 +14,7 @@ const Analytics = () => {
             try {
                 const res = await getMonthlyTrends(year);
                 setMonthlyData(res.data.data);
-                console.log("Monthly Trends Data:", res.data.data);
+                // console.log("Monthly Trends Data:", res.data.data);
 
 
             } catch (err) {
