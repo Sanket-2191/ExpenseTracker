@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-
+import { useNavigate } from 'react-router-dom';
 
 import Button from '../Button.jsx';
 import Confirm from '../../pages/Confirm.jsx';
@@ -10,10 +10,13 @@ import { logoutUser } from '../../store/authSlice.js';
 
 const LogoutBtn = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
 
     const logoutHandler = async () => {
         await dispatch(logoutUser());
+        navigate('/', { replace: true });
+
     }
 
     const [confirmationModal, setConfirmationModal] = useState(false);

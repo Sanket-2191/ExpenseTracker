@@ -55,7 +55,7 @@ export const logoutUser = createAsyncThunk(
     "auth/logoutUser",
     async (_, { rejectWithValue }) => {
         try {
-            console.log("trying to logout.");
+            // console.log("trying to logout.");
 
             const res = await axios.get(
                 `${API_URL}/logout`,
@@ -69,7 +69,7 @@ export const logoutUser = createAsyncThunk(
         } catch (error) {
             const message = error.response?.data?.message || "Logout failed";
             console.log("logout error: ", message);
-            toast.error("Logout failed");
+            // toast.error("Logout failed");
             return rejectWithValue(message);
         }
     }
@@ -123,11 +123,11 @@ const authSlice = createSlice({
                 state.user = null;
                 state.loading = false;
             })
-            .addCase(logoutUser.rejected, (state) => {
-                state.loggedIn = true;
-                state.user = state.user;
-                state.loading = false;
-            });
+        // .addCase(logoutUser.rejected, (state) => {
+        //     state.loggedIn = false;
+        //     state.user = state.user;
+        //     state.loading = false;
+        // });
     }
 });
 
