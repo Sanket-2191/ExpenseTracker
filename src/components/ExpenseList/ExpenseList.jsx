@@ -1,12 +1,17 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./ExpenseList.module.css";
 
 import Transaction from "../Transaction/Transaction.jsx";
-import { transactionSelector } from "../../store/transactionSlice.js";
+import { transactionSelector, fetchTransactions } from "../../store/transactionSlice.js";
 
 const ExpenseList = () => {
   const { transactions: expenses } = useSelector(transactionSelector);
+  const dispatch = useDispatch();
+  useEffect(() => {
+
+    dispatch(fetchTransactions())
+  }, [dispatch]);
 
   return (
     <div className={styles.expenseListContainer}>
