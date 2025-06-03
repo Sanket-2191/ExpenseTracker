@@ -123,11 +123,13 @@ const authSlice = createSlice({
                 state.user = null;
                 state.loading = false;
             })
-        // .addCase(logoutUser.rejected, (state) => {
-        //     state.loggedIn = false;
-        //     state.user = state.user;
-        //     state.loading = false;
-        // });
+            .addCase(logoutUser.rejected, (state) => {
+                if (!state.user) {
+                    state.loggedIn = false;
+                    state.user = state.user;
+                    state.loading = false;
+                }
+            });
     }
 });
 
