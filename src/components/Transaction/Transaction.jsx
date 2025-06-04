@@ -12,6 +12,8 @@ const Transaction = ({ expense }) => {
   const navigate = useNavigate();
 
   const handleEdit = () => {
+    console.log("Editing expense:", expense);
+
     dispatch(setToUpdate(expense));
     dispatch(setEditing({ id: expense._id, status: true }));
     navigate('/add-transaction');

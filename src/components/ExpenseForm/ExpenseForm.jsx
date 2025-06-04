@@ -70,6 +70,7 @@ const ExpenseForm = () => {
       category,
       type,
       date,
+      userId: toUpdate?.userId || null
     };
 
     console.log("Submitting payload:", payload);
@@ -81,6 +82,7 @@ const ExpenseForm = () => {
         .then(() => toast.success("Transaction added! ✅"))
         .catch((err) => toast.error(err || "Failed to add transaction ❌"));
     } else {
+      console.log("Updating transaction with ID:", toUpdate._id);
       dispatch(updateTransaction({ id: toUpdate._id, ...payload }))
         .unwrap()
         .then(() => toast.success("Transaction updated! ✏️"))

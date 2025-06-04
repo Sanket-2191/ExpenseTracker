@@ -46,15 +46,17 @@ export const createTransaction = createAsyncThunk(
 // Update a transaction by id
 export const updateTransaction = createAsyncThunk(
     "transactions/update",
-    async ({ id, amount, type, category, date, description }, thunkAPI) => {
+    async ({ id, amount, type, category, date, note }, thunkAPI) => {
         try {
             const res = await axios.patch(
                 `${API_URL}/${id}`,
-                { amount, type, category, date, description },
+                { amount, type, category, date, note },
                 {
                     withCredentials: true,
                 }
             );
+            console.log("Updated transaction: ", res.data.data);
+
             return res.data.data;
         } catch (error) {
             return thunkAPI.rejectWithValue(error.response?.data?.message || error.message);
