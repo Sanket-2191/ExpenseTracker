@@ -36,7 +36,7 @@ export const createTransaction = createAsyncThunk(
             );
             return res.data.data;
         } catch (error) {
-            console.log("error while creating transaction: ", error);
+            // console.log("error while creating transaction: ", error);
             return thunkAPI.rejectWithValue(error.response?.data?.message || error.message);
         }
     }
@@ -55,7 +55,7 @@ export const updateTransaction = createAsyncThunk(
                     withCredentials: true,
                 }
             );
-            console.log("Updated transaction: ", res.data.data);
+            // console.log("Updated transaction: ", res.data.data);
 
             return res.data.data;
         } catch (error) {

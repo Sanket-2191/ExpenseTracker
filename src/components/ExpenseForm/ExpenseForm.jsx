@@ -73,7 +73,7 @@ const ExpenseForm = () => {
       userId: toUpdate?.userId || null
     };
 
-    console.log("Submitting payload:", payload);
+    // console.log("Submitting payload:", payload);
 
 
     if (!editing.status) {
@@ -82,11 +82,11 @@ const ExpenseForm = () => {
         .then(() => toast.success("Transaction added! ✅"))
         .catch((err) => toast.error(err || "Failed to add transaction ❌"));
     } else {
-      console.log("Updating transaction with ID:", toUpdate._id);
+      // console.log("Updating transaction with ID:", toUpdate._id);
       dispatch(updateTransaction({ id: toUpdate._id, ...payload }))
         .unwrap()
         .then(() => toast.success("Transaction updated! ✏️"))
-        .catch((err) => toast.error(err || "Update failed ❌"));
+        .catch((err) => toast.error("Update failed ❌"));
 
       dispatch(resetEditing());
     }
